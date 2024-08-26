@@ -16,18 +16,6 @@ public class Dice
 
     public int roll()
     {
-        int value = (int) (Math.random() * sides) + 1;
-        sumUp(value);
-        return value;
-    }
-
-    private void sumUp(int diceThrow)
-    {
-        sum += diceThrow;
-    }
-
-    public void reset()
-    {
-        this.sum = 0;
+        return (int) (Math.random() * sides) + 1;
     }
 }
