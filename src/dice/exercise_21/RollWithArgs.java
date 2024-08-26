@@ -1,7 +1,5 @@
 package dice.exercise_21;
 
-import dice.Dice;
-
 public class RollWithArgs
 {
     public static void main(String[] args)

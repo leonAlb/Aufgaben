@@ -1,9 +1,8 @@
-package dice;
+package dice.exercise_21;
 
 public class Dice
 {
-    int sides;
-    int sum = 0;
+    protected int sides;
 
     public Dice(int sides)
     {

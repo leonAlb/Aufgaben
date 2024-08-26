@@ -1,8 +1,10 @@
-package dice;
+package dice.exercise_22;
+
+import dice.exercise_21.Dice;
 
 public class AdvancedDice extends Dice
 {
-
+    int sum = 0;
     public AdvancedDice(int sides) {
         super(sides);
     }

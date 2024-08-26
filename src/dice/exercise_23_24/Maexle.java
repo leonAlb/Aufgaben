@@ -1,6 +1,6 @@
 package dice.exercise_23_24;
 
-import dice.Dice;
+import dice.exercise_21.Dice;
 
 import java.util.Arrays;
 

@@ -1,8 +1,5 @@
 package dice.exercise_22;
 
-import dice.AdvancedDice;
-import dice.Dice;
-
 public class TestMethods
 {
     public static void main(String[] args)
