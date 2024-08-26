@@ -5,14 +5,13 @@ import dice.Dice;
 import java.util.Arrays;
 
 public class Maexle {
-    final static private int NUMBER_OF_SIDES = 6;
+    final static int NUMBER_OF_SIDES = 6;
 
-    int[] players;
-    int[] highscore;
+    protected int[] lives;
+    protected int[] highscore;
 
 
-    int currentMax = 0;
-    int playerCount = 0;
+    protected int currentMax = -1;
 
     final Dice diceOne;
     final Dice diceTwo;
@@ -23,12 +22,11 @@ public class Maexle {
         }
 
         // Initializes the array with the amount of lives left
-        players = new int[playerCount];
+        lives = new int[playerCount];
         highscore = new int[playerCount];
-        Arrays.fill(players, 3);
+        Arrays.fill(lives, 1);
         Arrays.fill(highscore, 0);
 
-        this.playerCount = playerCount;
         this.diceOne = new Dice(NUMBER_OF_SIDES);
         this.diceTwo = new Dice(NUMBER_OF_SIDES);
     }
@@ -40,32 +38,38 @@ public class Maexle {
         printPlayerList();
 
         while (!winnerDetermined){
-            printHighscore();
 
-            if (players[currentPlayer] > 0){
-                boolean beatTheRecord = roll(currentMax, currentPlayer);
-                if (!beatTheRecord){
-                    int livesLeft = players[currentPlayer] - 1;
-                    players[currentPlayer] = livesLeft;
-                    System.out.println("Player " + currentPlayer + " lost a life and has " + livesLeft + " lives left");
-                }
-            }
+            tryToBreakRecord(currentPlayer);
 
             currentPlayer = determineNextPlayer(currentPlayer);
 
-            if (winnerAvailable(players)) {
+            // checks the remaining lives and determines how many are left
+            if (winnerAvailable(lives)) {
                 winnerDetermined = true;
             }
         }
 
         // Declares the winner by looking at the index of the sole survivor
         String winner = "";
-        for (int i = 0; i < players.length; i++) {
-            if (players[i] != 0){
-                winner = "Player " + i;
+        for (int i = 0; i < lives.length; i++) {
+            if (lives[i] != 0){
+                winner = "Player " + i + " won the Game with " + lives[i] + " lives left";
             }
         }
         return winner;
+    }
+
+    private void tryToBreakRecord(int currentPlayer) {
+        // if the player has lives left he attempts to break the record
+        if (lives[currentPlayer] > 0){
+            boolean beatTheRecord = roll(currentMax, currentPlayer);
+            if (!beatTheRecord){
+                int livesLeft = lives[currentPlayer] - 1;
+                lives[currentPlayer] = livesLeft;
+                System.out.println("Player " + currentPlayer + " lost a life and has " + livesLeft + " lives left");
+            }
+            printHighscore();
+        }
     }
 
     /**
@@ -73,15 +77,15 @@ public class Maexle {
      *
      * @param valueToBeat - the highest rolled value to beat
      */
-    private boolean roll(int valueToBeat, int currentPlayer) {
+    protected boolean roll(int valueToBeat, int currentPlayer) {
 
         int rolledValue = rollDice();
 
         // Output for Exercise 24
         System.out.println(
                 "Current player: " + currentPlayer +
-                "| Max to beat: " + currentMax +
-                "| Value rolled: " + rolledValue
+                " | Max to beat: " + currentMax +
+                " | Value rolled: " + rolledValue
         );
 
         // Highest possible value already reached, always loses
@@ -165,7 +169,7 @@ public class Maexle {
         }
     }
 
-    private boolean winnerAvailable(int[] players){
+    protected boolean winnerAvailable(int[] players){
         int counter = 0;
 
         // Checks if all but one player lost all their lives
@@ -178,21 +182,21 @@ public class Maexle {
         return counter == players.length - 1;
     }
 
-    private int determineNextPlayer(int currentPlayer){
-        int nextPlayer = (currentPlayer + 1) % players.length;
+    protected int determineNextPlayer(int currentPlayer){
+        int nextPlayer = (currentPlayer + 1) % lives.length;
         return nextPlayer;
     }
 
-    private void printPlayerList(){
-        System.out.println("Number of players: " + players.length);
+    protected void printPlayerList(){
+        System.out.println("Number of players: " + lives.length);
         System.out.println("List of players: ");
-        for (int i = 0; i < players.length; i++) {
+        for (int i = 0; i < lives.length; i++) {
             System.out.println("Player " + i);
         }
         System.out.println("----------------------------------------------------");
     }
 
-    private void printHighscore(){
+    protected void printHighscore(){
 
         int player = 0;
         for (int i = 0; i < highscore.length; i++) {
