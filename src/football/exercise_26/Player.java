@@ -1,5 +1,7 @@
 package football.exercise_26;
 
+import football.NumberUtils;
+
 public class Player {
     private final static int MINIMAL_SKILL = 25;
     private final static int MAXIMAL_SKILL = 50;
@@ -14,19 +16,21 @@ public class Player {
     int positionBonus = 0;
 
     public Player(boolean goalKeeper) {
-        this.shootSkill = generateRandomSkills();
-        this.passSkill = generateRandomSkills();
-        this.dribbleSkill = generateRandomSkills();
-        this.defendSkill = generateRandomSkills();
-        this.catchSkill = generateRandomSkills();
+        this.shootSkill = NumberUtils.generateNumberInRange(MINIMAL_SKILL, MAXIMAL_SKILL);
+        this.passSkill = NumberUtils.generateNumberInRange(MINIMAL_SKILL, MAXIMAL_SKILL);
+        this.dribbleSkill = NumberUtils.generateNumberInRange(MINIMAL_SKILL, MAXIMAL_SKILL);
+        this.defendSkill = NumberUtils.generateNumberInRange(MINIMAL_SKILL, MAXIMAL_SKILL);
+        this.catchSkill = NumberUtils.generateNumberInRange(MINIMAL_SKILL, MAXIMAL_SKILL);
 
         this.goalKeeper = goalKeeper;
     }
 
-    private int generateRandomSkills(){
-        return MINIMAL_SKILL + (int)(Math.random() * ((MAXIMAL_SKILL - MINIMAL_SKILL) + 1));
+    public void increasePositionBonus() {
+        positionBonus += 5;
     }
 
-
+    public void resetPositionBonus() {
+        this.positionBonus = 0;
+    }
 
 }
