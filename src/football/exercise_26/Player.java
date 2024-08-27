@@ -12,6 +12,11 @@ public class Player {
     final int defendSkill;
     final int catchSkill;
 
+    // TODO bekommt eine Angriff und Verteidigungsstrategie der dem Verteidiger übergeben werden kann
+    // TODO also attackMove() und defendMove() gibt jeweils true false zurück wenn erfolgreich
+    // TODO erfolgreiche Verteidigung muss den switch der "turn" variable machen
+
+
     final boolean goalKeeper;
     int positionBonus = 0;
 

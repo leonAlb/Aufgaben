@@ -49,5 +49,8 @@ public class SoccerGame {
         overallPlayTimeSecondHalf = HALFTIME + overtimeTwo;
 
     }
+
+    // TODO Strategie überlegen wie eine Halbzeit beendet werden könnte
+    // TODO Methode move() wird jede Minute aufgerufen und führt die Methoden der Player aus
 }
 
